@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "zein_pause_menu",
+  "version": "${version}",
+  "name": "ZEIN SMP Pause Menu",
+  "description": "A ZEIN SMP branded Minecraft pause menu.",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "xyz.zeinsmp.menu.ZeinPauseMenuClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
