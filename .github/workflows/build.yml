@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -19,18 +19,35 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Validate resource pack
+      - name: Validate Minecraft 1.21.11 resource pack
         run: |
           test -f pack.mcmeta
-          test -d assets
+          test -f assets/minecraft/font/default.json
+          test -f assets/minecraft/textures/font/zein_title.png
+          test -d assets/minecraft/textures/gui/sprites/widget
+          python -m json.tool pack.mcmeta > /dev/null
+          python -m json.tool assets/minecraft/font/default.json > /dev/null
+          grep -q '"min_format": 75' pack.mcmeta
+          grep -q '"max_format": 75' pack.mcmeta
 
       - name: Create resource pack ZIP
         run: |
-          zip -r ZeinSMP-ResourcePack.zip assets default.json pack.mcmeta
+          rm -f ZeinSMP-ResourcePack.zip
+          zip -r ZeinSMP-ResourcePack.zip pack.mcmeta assets
+          unzip -l ZeinSMP-ResourcePack.zip
+          echo "SHA1=$(sha1sum ZeinSMP-ResourcePack.zip | cut -d ' ' -f 1)" >> "$GITHUB_ENV"
 
-      - name: Upload resource pack
+      - name: Upload resource pack artifact
         uses: actions/upload-artifact@v4
         with:
           name: ZeinSMP-ResourcePack
           path: ZeinSMP-ResourcePack.zip
           if-no-files-found: error
+
+      - name: Replace the public GitHub Release download
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload Texture ZeinSMP-ResourcePack.zip --clobber
+          echo "Updated release asset SHA-1: $SHA1" >> "$GITHUB_STEP_SUMMARY"
