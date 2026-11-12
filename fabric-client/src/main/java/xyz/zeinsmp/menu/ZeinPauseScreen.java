@@ -27,7 +27,7 @@ public final class ZeinPauseScreen extends Screen {
 
         int centerX = this.width / 2;
         int titleY = Math.max(34, this.height / 4 - 12);
-        drawScaledCentered(graphics, "ZEIN SMP", centerX, titleY, 2.8F, 0xFFFF303D);
+        drawScaledCentered(graphics, "ZEIN SMP", centerX, titleY, 3.5F, 0xFFFF303D);
 
         String[] labels = {"DC", "IP", "STORE"};
         int totalWidth = labels.length * BUTTON_WIDTH + (labels.length - 1) * BUTTON_GAP;
@@ -47,12 +47,12 @@ public final class ZeinPauseScreen extends Screen {
             graphics.fill(x + 1, buttonY + 1, x + BUTTON_WIDTH - 1,
                     buttonY + BUTTON_HEIGHT - 1, fill);
             drawScaledCentered(graphics, labels[i], x + BUTTON_WIDTH / 2,
-                    buttonY + 11, 1.8F + pulse * 0.04F,
+                    buttonY + 11, 2.5F,
                     hovered ? 0xFFFFFFFF : 0xFFE8DADD);
         }
 
         drawScaledCentered(graphics, "ZEINSMP.XYZ", centerX,
-                buttonY + 66, 1.35F, 0xFFB7A9AC);
+                buttonY + 66, 2.0F, 0xFFB7A9AC);
 
         super.render(graphics, mouseX, mouseY, partialTick);
     }
