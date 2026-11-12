@@ -9,9 +9,9 @@ import net.minecraft.network.chat.Component;
 public final class ZeinPauseScreen extends Screen {
     private static final String SERVER_IP = "zeinsmp.xyz";
 
-    private static final int BUTTON_WIDTH = 112;
-    private static final int BUTTON_HEIGHT = 30;
-    private static final int BUTTON_GAP = 12;
+    private static final int BUTTON_WIDTH = 140;
+    private static final int BUTTON_HEIGHT = 40;
+    private static final int BUTTON_GAP = 16;
 
     public ZeinPauseScreen() {
         super(Component.literal("ZEIN SMP"));
@@ -27,7 +27,7 @@ public final class ZeinPauseScreen extends Screen {
 
         int centerX = this.width / 2;
         int titleY = Math.max(34, this.height / 4 - 12);
-        drawScaledCentered(graphics, "ZEIN SMP", centerX, titleY, 2.0F, 0xFFFF303D);
+        drawScaledCentered(graphics, "ZEIN SMP", centerX, titleY, 2.8F, 0xFFFF303D);
 
         String[] labels = {"DC", "IP", "STORE"};
         int totalWidth = labels.length * BUTTON_WIDTH + (labels.length - 1) * BUTTON_GAP;
@@ -47,12 +47,12 @@ public final class ZeinPauseScreen extends Screen {
             graphics.fill(x + 1, buttonY + 1, x + BUTTON_WIDTH - 1,
                     buttonY + BUTTON_HEIGHT - 1, fill);
             drawScaledCentered(graphics, labels[i], x + BUTTON_WIDTH / 2,
-                    buttonY + 9, 1.35F + pulse * 0.025F,
+                    buttonY + 11, 1.8F + pulse * 0.04F,
                     hovered ? 0xFFFFFFFF : 0xFFE8DADD);
         }
 
-        graphics.drawCenteredString(this.font, Component.literal("ZEINSMP.XYZ"),
-                centerX, buttonY + 58, 0xFFB7A9AC);
+        drawScaledCentered(graphics, "ZEINSMP.XYZ", centerX,
+                buttonY + 66, 1.35F, 0xFFB7A9AC);
 
         super.render(graphics, mouseX, mouseY, partialTick);
     }
