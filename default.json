@@ -1,0 +1,13 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "minecraft:font/zein_title.png",
+      "ascent": 38,
+      "height": 42,
+      "chars": [
+        "\ue000"
+      ]
+    }
+  ]
+}
