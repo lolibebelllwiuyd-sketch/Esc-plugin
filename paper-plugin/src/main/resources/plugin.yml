@@ -1,0 +1,15 @@
+name: ZeinPack
+version: '${version}'
+main: xyz.zeinsmp.zeinpack.ZeinPackPlugin
+api-version: '1.21'
+author: ZEIN SMP
+description: Sends the ZEIN SMP resource pack to players and tracks pack status.
+commands:
+  zeinpack:
+    description: Manage the ZEIN SMP resource pack.
+    usage: /zeinpack <send|reload>
+    permission: zeinpack.admin
+permissions:
+  zeinpack.admin:
+    description: Allows managing the ZEIN SMP resource pack.
+    default: op
