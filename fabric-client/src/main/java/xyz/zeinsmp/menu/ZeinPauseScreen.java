@@ -1,12 +1,9 @@
 package xyz.zeinsmp.menu;
 
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-
-import java.net.URI;
 
 public final class ZeinPauseScreen extends Screen {
     private static final String SERVER_IP = "zeinsmp.xyz";
@@ -23,14 +20,12 @@ public final class ZeinPauseScreen extends Screen {
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         this.renderBackground(graphics, mouseX, mouseY, partialTick);
 
-        // Dark branded backdrop with a restrained red accent.
         graphics.fill(0, 0, this.width, this.height, 0xE8101014);
         graphics.fill(0, 0, this.width, 3, 0xFFB51220);
         graphics.fill(0, this.height - 3, this.width, this.height, 0xFFB51220);
 
         int centerX = this.width / 2;
         int titleY = Math.max(34, this.height / 4 - 12);
-
         drawScaledCentered(graphics, "ZEIN SMP", centerX, titleY, 2.0F, 0xFFFF303D);
 
         String[] labels = {"DC", "IP", "STORE"};
@@ -45,19 +40,18 @@ public final class ZeinPauseScreen extends Screen {
 
             float pulse = (float) (0.5 + 0.5 * Math.sin(System.currentTimeMillis() / 420.0));
             int edge = hovered ? 0xFFFF4652 : 0xFF8D1822;
-            int fill = hovered
-                    ? 0xFF492027
-                    : (0xFF24171B | ((int) (pulse * 8) << 16));
+            int fill = hovered ? 0xFF492027 : 0xFF24171B;
 
             graphics.fill(x, buttonY, x + BUTTON_WIDTH, buttonY + BUTTON_HEIGHT, edge);
             graphics.fill(x + 1, buttonY + 1, x + BUTTON_WIDTH - 1,
                     buttonY + BUTTON_HEIGHT - 1, fill);
             drawScaledCentered(graphics, labels[i], x + BUTTON_WIDTH / 2,
-                    buttonY + 9, 1.35F, hovered ? 0xFFFFFFFF : 0xFFE8DADD);
+                    buttonY + 9, 1.35F + pulse * 0.025F,
+                    hovered ? 0xFFFFFFFF : 0xFFE8DADD);
         }
 
-        drawCenteredString(graphics, this.font,
-                Component.literal("ZEINSMP.XYZ"), centerX, buttonY + 58, 0xFFB7A9AC);
+        graphics.drawCenteredString(this.font, Component.literal("ZEINSMP.XYZ"),
+                centerX, buttonY + 58, 0xFFB7A9AC);
 
         super.render(graphics, mouseX, mouseY, partialTick);
     }
@@ -89,7 +83,6 @@ public final class ZeinPauseScreen extends Screen {
                 if (i == 1) {
                     Minecraft.getInstance().keyboardHandler.setClipboard(SERVER_IP);
                 } else {
-                    // Discord and Store URLs will be connected after their links are supplied.
                     Minecraft.getInstance().keyboardHandler.setClipboard(
                             i == 0 ? "Add your ZEIN SMP Discord URL" : "Add your ZEIN SMP Store URL");
                 }
