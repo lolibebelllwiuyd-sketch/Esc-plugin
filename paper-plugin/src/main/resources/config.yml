@@ -1,0 +1,19 @@
+# ZEIN SMP resource pack settings
+resource-pack:
+  url: "https://github.com/lolibebelllwiuyd-sketch/Esc-plugin/releases/download/Texture/ZeinSMP-ResourcePack.zip"
+  # SHA-1 of the exact ZIP file (40 hexadecimal characters).
+  sha1: "75ab6511b406383353ee56002602a5648afd43a0"
+  # If true, players who decline the pack are disconnected.
+  required: true
+  prompt: "<red><bold>ZEIN SMP</bold></red><gray> - Download the official server resource pack?"
+  # Delay after join, in ticks. 20 ticks = 1 second.
+  join-delay-ticks: 20
+
+messages:
+  loaded: "<green>ZEIN SMP resource pack loaded successfully."
+  declined: "<red>Please enable the ZEIN SMP resource pack to play."
+  failed: "<red>Could not download the ZEIN SMP resource pack. Please reconnect or contact staff."
+  sent: "<green>Resource pack request sent."
+  reloaded: "<green>ZEINPack configuration reloaded."
+  no-permission: "<red>You do not have permission."
+  invalid-config: "<red>Resource pack URL or SHA-1 is invalid. Please contact staff."
