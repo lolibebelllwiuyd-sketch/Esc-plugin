@@ -3,6 +3,7 @@ package xyz.zeinsmp.menu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 
 public final class ZeinPauseScreen extends Screen {
@@ -58,19 +59,21 @@ public final class ZeinPauseScreen extends Screen {
 
     private void drawScaledCentered(GuiGraphics graphics, String text, int centerX,
                                     int y, float scale, int color) {
-        graphics.pose().pushPose();
-        graphics.pose().scale(scale, scale, 1.0F);
+        graphics.pose().pushMatrix();
+        graphics.pose().scale(scale, scale);
         graphics.drawCenteredString(this.font, Component.literal(text),
                 (int) (centerX / scale), (int) (y / scale), color);
-        graphics.pose().popPose();
+        graphics.pose().popMatrix();
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (button != 0) {
-            return super.mouseClicked(mouseX, mouseY, button);
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        if (event.button() != 0) {
+            return super.mouseClicked(event, doubleClick);
         }
 
+        double mouseX = event.x();
+        double mouseY = event.y();
         int centerX = this.width / 2;
         int totalWidth = BUTTON_WIDTH * 3 + BUTTON_GAP * 2;
         int startX = centerX - totalWidth / 2;
@@ -89,7 +92,7 @@ public final class ZeinPauseScreen extends Screen {
                 return true;
             }
         }
-        return super.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(event, doubleClick);
     }
 
     @Override
