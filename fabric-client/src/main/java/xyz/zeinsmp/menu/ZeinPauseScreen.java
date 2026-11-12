@@ -12,6 +12,7 @@ public final class ZeinPauseScreen extends Screen {
     private static final int BUTTON_WIDTH = 140;
     private static final int BUTTON_HEIGHT = 40;
     private static final int BUTTON_GAP = 16;
+    private static final int VERTICAL_OFFSET = 35;
 
     public ZeinPauseScreen() {
         super(Component.literal("ZEIN SMP"));
@@ -26,13 +27,13 @@ public final class ZeinPauseScreen extends Screen {
         graphics.fill(0, this.height - 3, this.width, this.height, 0xFFB51220);
 
         int centerX = this.width / 2;
-        int titleY = Math.max(34, this.height / 4 - 12);
+        int titleY = Math.max(34, this.height / 4 - 12) + VERTICAL_OFFSET;
         drawScaledCentered(graphics, "ZEIN SMP", centerX, titleY, 3.5F, 0xFFFF303D);
 
         String[] labels = {"DC", "IP", "STORE"};
         int totalWidth = labels.length * BUTTON_WIDTH + (labels.length - 1) * BUTTON_GAP;
         int startX = centerX - totalWidth / 2;
-        int buttonY = this.height / 2 - BUTTON_HEIGHT / 2;
+        int buttonY = this.height / 2 - BUTTON_HEIGHT / 2 + VERTICAL_OFFSET;
 
         for (int i = 0; i < labels.length; i++) {
             int x = startX + i * (BUTTON_WIDTH + BUTTON_GAP);
