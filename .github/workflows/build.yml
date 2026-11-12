@@ -3,11 +3,9 @@ name: Build Zein Plugin
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -15,11 +13,10 @@ permissions:
 
 jobs:
   build:
-    name: Build Plugin
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Java 21
@@ -32,9 +29,9 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Build Plugin
-        run: chmod +x gradlew && ./gradlew clean build
+        run: gradle clean build
 
-      - name: Upload Plugin JAR
+      - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
           name: Zein-Plugin
